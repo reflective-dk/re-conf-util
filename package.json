@@ -1,0 +1,21 @@
+{
+  "name": "re-conf-util",
+  "version": "0.1.0",
+  "description": "Conf project utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/reflective-dk/re-conf-util.git"
+  },
+  "keywords": [
+    "reflective",
+    "configuration",
+    "util"
+  ],
+  "author": "Reflective Code <code@reflective.dk>",
+  "license": "UNLICENSED",
+  "private": true
+}
