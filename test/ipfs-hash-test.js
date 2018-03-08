@@ -22,5 +22,4 @@ function setUp() {
     this.smallHash = 'Qmcpsr5N2XwMtRWMsM7omHcFELtRETKTkdnvkB1CZqPmbw';
     this.large = Buffer.alloc(1024**2, 'x').toString();
     this.largeHash = 'QmZxqsmKZbwrPGAiPDgnUHKuh7FicKDFMpaE8B6mhdQAH3';
-    fs.writeFileSync('file.txt', this.large);
 }
