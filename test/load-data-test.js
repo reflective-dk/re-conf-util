@@ -14,4 +14,10 @@ describe('loadData', function() {
             .that.is.an.instanceof(Buffer, 'produced map should include buffer for this file')
             .notify(done);
     });
+
+    it('should return {} when location does not exist', function(done) {
+        expect(loadData('not-here'))
+            .to.eventually.deep.equal({})
+            .notify(done);
+    });
 });
