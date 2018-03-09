@@ -1,19 +1,22 @@
 "use strict";
 
 var chai = require('chai');
+chai.use(require('chai-as-promised'));
 var expect = chai.expect;
-var buildConf = require('../lib/build-conf');
+var resolveConf = require('../lib/resolve-conf');
 
-describe('buildConf', function() {
+describe('resolveConf', function() {
     before(setUp);
-    it('should build conf with no dependencies', function() {
-        expect(buildConf(this.baseConf, this.dataMap, []))
-            .to.deep.equal(this.confNoDeps, 'no dependencies specified so none should not be included');
+    it('should resolve conf with no dependencies', function() {
+        expect(resolveConf(this.baseConf, this.dataMap, []))
+            .to.eventually.deep.equal(this.confNoDeps,
+            'no dependencies specified so none should not be included');
     });
 
-    it('should build conf with a set of dependencies', function() {
-        expect(buildConf(this.baseConf, this.dataMap, [ this.depConf ]))
-            .to.deep.equal(this.confWithDeps, 'one dependency should be pulled in');
+    it('should resolve conf with a set of dependencies', function() {
+        expect(resolveConf(this.baseConf, this.dataMap, [ this.depConf ]))
+            .to.eventually.deep.equal(this.confWithDeps,
+            'one dependency should be pulled in');
     });
 });
 
