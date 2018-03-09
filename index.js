@@ -2,5 +2,5 @@
 
 module.exports = {
     ipfsHash: require('./lib/ipfs-hash'),
-    buildState: require('./lib/build-state')
+    prepareConf: require('./lib/prepare-conf')
 };

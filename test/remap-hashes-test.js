@@ -2,18 +2,18 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var decorateObject = require('../lib/enrich-with-data').decorateObject;
+var remapObject = require('../lib/remap-hashes').remapObject;
 
-describe('enrichWithData', function() {
-    describe('decorateObject', function() {
+describe('remapHashes', function() {
+    describe('remapObject', function() {
         before(setUp);
-        it('should decorate single reference attribute of one object', function() {
-            expect(decorateObject(this.single, this.keys, this.hashes))
+        it('should remap single reference attribute of one object', function() {
+            expect(remapObject(this.single, this.keys, this.hashes))
                 .to.deep.equal(this.decoratedSingle);
         });
 
-        it('should decorate multi reference attribute of one object', function() {
-            expect(decorateObject(this.multi, this.keys, this.hashes))
+        it('should remap multi reference attribute of one object', function() {
+            expect(remapObject(this.multi, this.keys, this.hashes))
                 .to.deep.equal(this.decoratedMulti);
         });
     });
