@@ -23,6 +23,7 @@
     "ipfs-unixfs-engine": "^0.24.4",
     "ipld": "^0.15.0",
     "lodash": "^4.17.5",
+    "mz": "^2.7.0",
     "pull-to-promise": "^1.0.1",
     "uuid": "^3.2.1"
   },
