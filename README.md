@@ -26,10 +26,11 @@ module.exports = confUtil.prepareConf(confLoc, dataLoc, 'model');
 Simply pull in this module as a dependency and use `prepareConf()` as above. If
 you're creating a configuration module that depends on other configurations,
 simple `require` them into your `index.js` and include them in the call:
+
 ```
 var extraConf = require('extra-conf');
 
-module.exports = confUtil.prepareConf(confLoc, dataLoc, 'model', [ extra-conf ]);
+module.exports = confUtil.prepareConf(confLoc, dataLoc, 'model', [ extraConf ]);
 ```
 
 ### Functionality ###
@@ -65,4 +66,4 @@ Configurations prepared in this way can be used in two ways:
    };
    ```
 
-   Look at `test/end-to-end-test.js` for more information.
+Look at `test/end-to-end-test.js` for more information.
