@@ -37,33 +37,48 @@ module.exports = confUtil.prepareConf(confLoc, dataLoc, 'model', [ extraConf ]);
 
 Configurations prepared in this way can be used in two ways:
 
-1. They can be `require`'d as regular dependencies if you just need to reference
-   their contents in code:
+#### As dependency ####
 
-   ```
-   var myConf = require('my-conf');
-   
-   function something() {
-       someOperation(myConf.model.foo.classes.bar.id);
-   }
-   ```
+They can be `require`'d as regular dependencies if you just need to reference
+their contents in code:
 
-2. Having `require`'d a configuration, you can call the `resolve()` promise
-   function which will load any data files into buffers and replace dynamic hash
-   links in the configuration objects. The resolved conf structure is as
-   follows:
+```
+var myConf = require('my-conf');
 
-   ```
-   myConf.resolve().then(resolved) yields:
-   resolved = {
-       name: 'my-conf',
-       model: { foo: {
-           classes: { bar: { /* bar class */ } },
-           instances: { bar: { /* bar instances */ } }
-       } },
-       state: { 'test-conf': [ /* bar class and instances */ ] },
-       data: [ /* Buffers of data */ ]
-   };
-   ```
+function something() {
+    someOperation(myConf.model.foo.classes.bar.id);
+}
+```
+
+When used in this fashion, all objects in the model are enriched to this
+structure for convenience:
+
+```
+{
+  id: 'some-id',
+  name: 'name if available, else id',
+  snapshot: { /* payload */ },
+  registrations: [ { validity: [ { input: { /* payload */ } } ] } ],
+  ref: { id: 'object id', name: 'object name' }
+}
+```
+
+#### As repository for data and objects ####
+Having `require`'d a configuration, you can call the `resolve()` promise function
+which will load any data files into buffers and replace dynamic hash links in the
+configuration objects. The resolved conf structure is as follows:
+
+```
+myConf.resolve().then(resolved) yields:
+resolved = {
+    name: 'my-conf',
+    model: { foo: {
+        classes: { bar: { /* bar class */ } },
+        instances: { bar: { /* bar instances */ } }
+    } },
+    state: { 'test-conf': [ /* bar class and instances */ ] },
+    data: [ /* Buffers of data */ ]
+};
+```
 
 Look at `test/end-to-end-test.js` for more information.
