@@ -24,12 +24,19 @@ describe('End-to-end test', function() {
 
 function setUp() {
     var acmeClass = requireyml(path.join(confLoc, 'test', 'classes', 'acme'));
+    acmeClass.snapshot = acmeClass.registrations[0].validity[0].input;
+    acmeClass.name = acmeClass.snapshot.name;
+    acmeClass.ref = { id: acmeClass.id, name: acmeClass.name };
     var acme1 = requireyml(path.join(confLoc, 'test', 'instances', 'acme', 'acme-1'));
+    acme1.snapshot = acme1.registrations[0].validity[0].input;
+    acme1.name = acme1.snapshot.name;
+    acme1.ref = { id: acme1.id, name: acme1.name };
+    acme1.snapshot.widget.hash = 'QmXpKLc4Lmki1ey7c91KeNHvXVKVHxbezHqEBWn5gmwu35';
     var acme2 = requireyml(path.join(confLoc, 'test', 'instances', 'acme', 'acme-2'));
-    acme1.registrations[0].validity[0].input.widget.hash =
-        'QmXpKLc4Lmki1ey7c91KeNHvXVKVHxbezHqEBWn5gmwu35';
-    acme2.registrations[0].validity[0].input.widget.hash =
-        'QmQZJY6gh1aWFMyhWocGix7fMMDv94pmCVd3p8d59XHW4b';
+    acme2.snapshot = acme2.registrations[0].validity[0].input;
+    acme2.name = acme2.snapshot.name;
+    acme2.ref = { id: acme2.id, name: acme2.name };
+    acme2.snapshot.widget.hash = 'QmQZJY6gh1aWFMyhWocGix7fMMDv94pmCVd3p8d59XHW4b';
     this.resolved = {
         name: 'test-conf',
         model: { test: {
