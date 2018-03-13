@@ -16,7 +16,7 @@ describe('End-to-end test', function() {
     before(setUp);
     it('should prepare test configuration', function(done) {
         var conf = confUtil.prepareConf(confLoc, dataLoc, 'test-conf');
-        expect(conf.resolve())
+        expect(conf.resolve().tap(resolved => delete resolved.resolve))
             .to.eventually.deep.equal(this.resolved)
             .notify(done);
     });

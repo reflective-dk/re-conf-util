@@ -1,5 +1,6 @@
 "use strict";
 
+var Promise = require('bluebird');
 var chai = require('chai');
 chai.use(require('chai-as-promised'));
 var expect = chai.expect;
@@ -21,6 +22,7 @@ describe('resolveConf', function() {
 });
 
 function setUp() {
+    var self = this;
     this.baseConf = {
         name: 'conf-acme',
         model: {
@@ -35,12 +37,13 @@ function setUp() {
     // Therefore this dependency already has state and data
     this.depConf = {
         name: 'conf-boring',
-        mode: {
+        model: {
             boring: {
                 classes: { 'boring-class': { id: 'boring-class' } },
                 instances: { 'boring-class': { 'boring-instance': { id: 'boring-instance' } } }
             }
         },
+        resolve: function() { return Promise.resolve(self.depConf); },
         state: {
             'conf-boring': [ { id: 'boring-class' }, { id: 'boring-instance' } ]
         },
