@@ -8,8 +8,14 @@ var resolveConf = require('../lib/resolve-conf');
 
 describe('resolveConf', function() {
     before(setUp);
-    it('should resolve conf with no dependencies', function() {
+    it('should resolve conf with empty dependency array', function() {
         expect(resolveConf(this.baseConf, this.dataMap, []))
+            .to.eventually.deep.equal(this.confNoDeps,
+            'no dependencies specified so none should not be included');
+    });
+
+    it('should resolve conf with no dependencies specified', function() {
+        expect(resolveConf(this.baseConf, this.dataMap))
             .to.eventually.deep.equal(this.confNoDeps,
             'no dependencies specified so none should not be included');
     });
