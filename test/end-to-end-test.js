@@ -20,6 +20,13 @@ describe('End-to-end test', function() {
             .to.eventually.deep.equal(this.resolved)
             .notify(done);
     });
+
+    it('should build array of objects', function(done) {
+        var conf = confUtil.prepareConf(confLoc, dataLoc, 'test-conf');
+        expect(confUtil.buildObjects(conf))
+            .to.eventually.deep.equal(this.objects)
+            .notify(done);
+    });
 });
 
 function setUp() {
@@ -49,4 +56,5 @@ function setUp() {
             Buffer.from('This is Widget 2\n')
         ]
     };
+    this.objects = [ acmeClass, acme1, acme2 ];
 }
