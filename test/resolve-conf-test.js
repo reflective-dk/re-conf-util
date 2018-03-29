@@ -66,6 +66,7 @@ function setUp() {
                 instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
             }
         },
+        misc: [],
         state: {
             'conf-acme': [ { id: 'acme-class' }, { id: 'acme-instance' } ]
         },
@@ -80,6 +81,7 @@ function setUp() {
                 instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
             }
         },
+        misc: [],
         state: {
             'conf-acme': [ { id: 'acme-class' }, { id: 'acme-instance' } ],
             'conf-boring': [ { id: 'boring-class' }, { id: 'boring-instance' } ]

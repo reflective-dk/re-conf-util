@@ -51,6 +51,7 @@ function setUp() {
             instances: { acme: { 'acme-1': acme1, 'acme-2': acme2 } }
         } },
         state: { 'test-conf': [ acmeClass, acme1, acme2 ] },
+        misc: [],
         data: [
             Buffer.from('This is Widget 1\n'),
             Buffer.from('This is Widget 2\n')
