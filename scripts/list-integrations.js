@@ -2,11 +2,12 @@
 
 "use strict";
 
-var confUtil = require('re-conf-util');
+var path = require('path');
 var models = require('re-models').model;
-var conf = require('../index');
+var buildObjects = require(path.join(__dirname, '../lib/build-objects'));
+var conf = require(process.env.PWD); // Loads index.js of outer npm project
 
-confUtil.buildObjects(conf).then(function(objects) {
+buildObjects(conf).then(function(objects) {
     console.log('Integration Specs:');
     objects.filter(o => o.registrations[0].validity[0].input.class.id ===
                    models.integration.classes['integration-spec'].id)
