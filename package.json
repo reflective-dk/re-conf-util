@@ -4,6 +4,7 @@
   "description": "Conf project utilities",
   "main": "index.js",
   "bin": {
+    "build-objects": "./scripts/build-objects.js",
     "list-integrations" : "./scripts/list-integrations.js"
   },
   "scripts": {
