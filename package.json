@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Conf project utilities",
   "main": "index.js",
+  "bin": {
+    "list-integrations" : "./scripts/list-integrations.js"
+  },
   "scripts": {
     "test": "mocha --recursive"
   },
@@ -25,6 +28,7 @@
     "lodash": "^4.17.5",
     "mz": "^2.7.0",
     "pull-to-promise": "^1.0.1",
+    "re-models": "git+ssh://git@github.com/reflective-dk/re-models.git",
     "require-yml": "^1.3.1",
     "uuid": "^3.2.1"
   },
