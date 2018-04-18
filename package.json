@@ -42,6 +42,7 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "rimraf": "^2.6.2",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1"
   }

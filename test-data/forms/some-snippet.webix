@@ -1,0 +1,4 @@
+{
+ type: "header",
+ template: "some snippet"
+}
