@@ -16,6 +16,11 @@ describe('remapHashes', function() {
             expect(remapObject(this.multi, this.keys, this.hashes))
                 .to.deep.equal(this.decoratedMulti);
         });
+
+        it('should ignore null values', function() {
+            expect(remapObject(this.objectWithNulls, this.keys, this.hashes))
+                .to.deep.equal(this.objectWithNulls);
+        });
     });
 });
 
@@ -66,6 +71,14 @@ function setUp() {
                 noMatch: { hash: 'no-luck' },
                 match: { hash: 'replaced-another-hash' }
             }
+        } } ] } ]
+    };
+
+    this.objectWithNulls = {
+        id: 'withNulls',
+        registrations: [ { validity: [ { input: {
+            normal: null,
+            multi: { anotherNull: null }
         } } ] } ]
     };
 }
