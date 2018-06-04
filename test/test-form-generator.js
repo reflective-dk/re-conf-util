@@ -1,12 +1,11 @@
 "use strict";
 
-var Promise = require('bluebird');
 var fs = require('mz/fs');
 var rimraf = require('rimraf');
 var assert = require('chai').assert;
 var formGenerator = require('../lib/form-generator');
 
-var formDir = __dirname + '/../test-data/forms'
+var formDir = __dirname + '/../test-data/forms';
 var dataDir = __dirname + '/../temp';
 
 var expectedResultFile = __dirname + '/../test-data/forms-expected/some-form-expected.js';

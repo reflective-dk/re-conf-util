@@ -3,7 +3,6 @@
 var chai = require('chai');
 chai.use(require('chai-as-promised'));
 var expect = chai.expect;
-var fs = require('fs');
 var ipfsHash = require('../lib/ipfs-hash');
 
 describe('ipfsHash', function() {
