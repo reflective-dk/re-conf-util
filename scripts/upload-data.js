@@ -13,6 +13,11 @@ conf.resolve()
     .then(cnf => {
         return cnf.upload(ipfs);
     })
+    .then(results => {
+        var out = {};
+        results.forEach(r => out[r[0].hash] = r[0].size);
+        console.log(out);
+    })
     .catch(function(errors) {
         console.log('operation failed:');
         console.log(inspect(errors, null, null));
