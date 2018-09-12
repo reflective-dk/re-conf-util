@@ -9,7 +9,7 @@
     "generate-forms": "./scripts/generate-forms.js",
     "build-objects": "./scripts/build-objects.js",
     "validate-objects": "./scripts/validate-objects.sh",
-    "upload-data": "./scripts/upload-data.sh",
+    "upload-data": "./scripts/upload-data.js",
     "list-integrations": "./scripts/list-integrations.js"
   },
   "scripts": {
