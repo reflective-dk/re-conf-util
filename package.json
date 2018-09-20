@@ -6,7 +6,6 @@
   "bin": {
     "binadd": "./scripts/binadd.js",
     "binget": "./scripts/binget.js",
-    "generate-forms": "./scripts/generate-forms.js",
     "build-objects": "./scripts/build-objects.js",
     "validate-objects": "./scripts/validate-objects.sh",
     "upload-data": "./scripts/upload-data.js",
