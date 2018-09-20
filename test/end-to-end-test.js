@@ -16,9 +16,12 @@ describe('End-to-end test', function() {
     before(setUp);
     it('should prepare test configuration', function(done) {
         var conf = confUtil.prepareConf(confLoc, dataLoc, 'test-conf');
-        expect(conf.resolve().tap(resolved => delete resolved.resolve))
-            .to.eventually.deep.equal(this.resolved)
-            .notify(done);
+        expect(conf.resolve().tap(resolved => {
+            delete resolved.resolve;
+            delete resolved.upload;
+            delete resolved.deploy;
+        })).to.eventually.deep.equal(this.resolved)
+           .notify(done);
     });
 
     it('should build array of objects', function(done) {
