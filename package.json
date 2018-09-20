@@ -9,7 +9,8 @@
     "build-objects": "./scripts/build-objects.js",
     "validate-objects": "./scripts/validate-objects.sh",
     "upload-data": "./scripts/upload-data.js",
-    "list-integrations": "./scripts/list-integrations.js"
+    "list-integrations": "./scripts/list-integrations.js",
+    "create-object": "./scripts/create-object.js"
   },
   "scripts": {
     "test": "mocha --recursive"

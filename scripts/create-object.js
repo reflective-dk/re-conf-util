@@ -11,7 +11,7 @@ var typeKey = process.argv[2];
 var name = process.argv[3];
 
 if (!typeKey || !name) {
-    console.error('usage: random <type> <name>');
+    console.error('usage: create-object <type> <name>');
     process.exit(1);
 }
 
