@@ -10,10 +10,24 @@ var Markdownpdf = require("markdown-pdf");
 var buildDocuments = require(path.join(__dirname, '../lib/build-documents'));
 var conf = require(process.env.PWD); // Loads index.js of outer npm project
 
-var preProcessHtml = function() {
+var preProcessHtml = function(src,dst) {
+    return function() {
+        return through(function(data) {
+            let strData = data.toString();
 
-    return through(function(data) {
-    });
+console.log("DEBUG: src=",src);
+console.log("DEBUG: dst=",dst);
+//console.log("DEBUG: data=",data);
+
+            // replace image path to absolute
+            const absolutePath = 'file:///' + path.dirname(src).replace(/ /g, '%20') + '/';
+            const find = /img src="/g;
+            const replace = 'img src="' + absolutePath;
+            strData = strData.replace(find, replace);
+
+            fs.createWriteStream(dst).write(strData);
+        });
+    };
 };
 
 buildDocuments(conf)
@@ -24,15 +38,9 @@ buildDocuments(conf)
                 html: true,
                 linkify: true,
                 typographer: true,
-            }
+            },
         };
-        let dstDir = path.join(process.env.PWD, 'build', 'docs')
-
-//        let mdHtml = new Remarkable(options.remarkable);
-
-        if (!fs.existsSync(dstDir)) {
-            fs.mkdirSync(dstDir, {recursive: true});
-        }
+        let dstDir = path.join(process.env.PWD, 'build', 'docs');
 
         // Build each markdown file to HTML and PDF. Only docs in docs/ root are used
         if (docs) docs.forEach(doc => {
@@ -44,11 +52,8 @@ buildDocuments(conf)
                 src = path.join('node_modules',doc);
             }
 
+            // Absolute src path
             src = path.join(process.env.PWD, src);
-
-            let mdPdf = Markdownpdf(options);
-console.log("DEBUG: src=",src);
-console.log("DEBUG: option.pwd=",options.pwd);
 
             // XXX: Move other doc types
             if (doc.endsWith(".md")) {
@@ -57,36 +62,21 @@ console.log("DEBUG: option.pwd=",options.pwd);
                 let dstPdf = path.join(dstDir, doc.replace('.md', '.pdf'));
                 let dstHtml = path.join(dstDir, doc.replace('.md', '.html'));
 
-                // replace image path to absolute
-//                const absolutePath = 'file:///' + process.cwd().replace(/ /g, '%20').replace(/\\/g, '/') + '/';
-//                const find = /img src="/g;
-//                const replace = 'img src="' + absolutePath;
-//                const mdStr = mdSourceStr.replace(find, replace);
-
-//console.log("DEBUG: preProcessHtml=",options.preProcessHtml);
-//options.preProcessHtml().pipe(process.stdout);
-//                options.preProcessHtml = function () { return through() };
-                mdPdf.from(src).to(dstPdf, function () {
-                  console.log(doc+" Done")
-                })
+                if (!fs.existsSync(dstDir)) {
+                    fs.mkdirSync(dstDir, {recursive: true});
+                }
+                options.preProcessHtml = preProcessHtml(src,dstHtml);
 
 
-//                    fs.createReadStream(src)
-//                    .pipe(mdPdf)
-//                    .pipe(fs.createWriteStream(dst))
+//                fs.createReadStream(src)
+//                      .pipe(Markdownpdf(Object.assign({},options)))
+//                      .pipe(fs.createWriteStream(dstPdf))
 
-//.pipe(fs.createWriteStream('out.txt'))
+                Markdownpdf(Object.assign({},options)).from(src).to(dstPdf, function () {
+                  console.log(doc+" Done");
+                });
             }
-
         });
-
-
-        // Create project index page
-
-
-//        var output = JSON.stringify({ objects: objects }, null, 2);
-//        try { fs.mkdirSync('build'); } catch(e) {}
-//        fs.writeFileSync(path.join(process.env.PWD, 'build/objects.json'), output);
     })
     .catch(function(errors) {
         console.log('Operation failed:');
