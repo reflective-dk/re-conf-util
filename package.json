@@ -11,8 +11,7 @@
     "validate-objects": "./scripts/validate-objects.sh",
     "upload-data": "./scripts/upload-data.js",
     "list-integrations": "./scripts/list-integrations.js",
-    "create-object": "./scripts/create-object.js",
-    "clobber": "rm -rf node_modules; rm -f package-lock.json"
+    "create-object": "./scripts/create-object.js"
   },
   "scripts": {
     "test": "mocha --recursive"
