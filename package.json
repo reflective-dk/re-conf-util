@@ -14,7 +14,8 @@
     "create-object": "./scripts/create-object.js"
   },
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "clobber": "rm -rf node_modules package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
   "private": true,
   "dependencies": {
     "bluebird": "^3.5.1",
+    "cheerio": "^1.0.0-rc.2",
     "ipfs-api": "^20.0.0",
     "ipfs-unixfs-engine": "^0.24.4",
     "ipld": "^0.15.0",

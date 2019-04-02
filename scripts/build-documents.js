@@ -6,6 +6,7 @@ var inspect = require('util').inspect;
 var fs = require('fs');
 var path = require('path');
 var through = require('through');
+var cheerio = require('cheerio');
 var Markdownpdf = require("markdown-pdf");
 var buildDocuments = require(path.join(__dirname, '../lib/build-documents'));
 var conf = require(process.env.PWD); // Loads index.js of outer npm project
@@ -13,19 +14,16 @@ var conf = require(process.env.PWD); // Loads index.js of outer npm project
 var preProcessHtml = function(src,dst) {
     return function() {
         return through(function(data) {
-            let strData = data.toString();
+            let $ = cheerio.load(data);
 
-console.log("DEBUG: src=",src);
-console.log("DEBUG: dst=",dst);
-//console.log("DEBUG: data=",data);
+            $('img[src]').each(function(i, elem) {
+                var path = $(this).attr('src');
+                path = src; // XXX:
+                $(this).attr('src', path);
+            });
 
-            // replace image path to absolute
-            const absolutePath = 'file:///' + path.dirname(src).replace(/ /g, '%20') + '/';
-            const find = /img src="/g;
-            const replace = 'img src="' + absolutePath;
-            strData = strData.replace(find, replace);
-
-            fs.createWriteStream(dst).write(strData);
+            fs.createWriteStream(dst).write($.html());
+            this.queue($.html());
         });
     };
 };
@@ -40,41 +38,24 @@ buildDocuments(conf)
                 typographer: true,
             },
         };
-        let dstDir = path.join(process.env.PWD, 'build', 'docs');
 
         // Build each markdown file to HTML and PDF. Only docs in docs/ root are used
-        if (docs) docs.forEach(doc => {
-            let src;
-            if (doc.startsWith(conf.name)) {
-                src = doc.replace(conf.name + path.sep, '');
-            } else {
-                doc = "re-" + doc;
-                src = path.join('node_modules',doc);
-            }
+        if (docs) Object.keys(docs).forEach(key => {
+            let src = docs[key];
+            if (typeof src === 'string' && src.endsWith(".md")) {
+                let dst = src.replace(process.env.PWD,'').replace('node_modules','')
+                             .replace('re-conf', 'conf').replace('docs', '');
+                dst = path.join(process.env.PWD,'build','docs',dst);
 
-            // Absolute src path
-            src = path.join(process.env.PWD, src);
+                let dstPdf = dst.replace('.md', '.pdf');
+                let dstHtml = dst.replace('.md', '.html');
 
-            // XXX: Move other doc types
-            if (doc.endsWith(".md")) {
-                doc = doc.replace('docs'+path.sep, '');
-
-                let dstPdf = path.join(dstDir, doc.replace('.md', '.pdf'));
-                let dstHtml = path.join(dstDir, doc.replace('.md', '.html'));
-
-                if (!fs.existsSync(dstDir)) {
-                    fs.mkdirSync(dstDir, {recursive: true});
-                }
                 options.preProcessHtml = preProcessHtml(src,dstHtml);
-
-
-//                fs.createReadStream(src)
-//                      .pipe(Markdownpdf(Object.assign({},options)))
-//                      .pipe(fs.createWriteStream(dstPdf))
-
                 Markdownpdf(Object.assign({},options)).from(src).to(dstPdf, function () {
-                  console.log(doc+" Done");
+                  console.log(dst+" Done");
                 });
+            } else {
+            // XXX: Move other doc types: images .. recurse
             }
         });
     })
