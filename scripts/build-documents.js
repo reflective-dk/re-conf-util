@@ -52,7 +52,7 @@ buildDocuments(conf)
 
                 options.preProcessHtml = preProcessHtml(src,dstHtml);
                 Markdownpdf(Object.assign({},options)).from(src).to(dstPdf, function () {
-                  console.log(dst+" Done");
+                  console.log("Done " + dst.replace(process.env.PWD,''));
                 });
             } else {
             // XXX: Move other doc types: images .. recurse
