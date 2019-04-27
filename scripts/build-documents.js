@@ -7,7 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var through = require('through');
 var cheerio = require('cheerio');
-var Markdownpdf = require("markdown-pdf");
+var markdownpdf = require('markdown-pdf');
 var buildDocuments = require(path.join(__dirname, '../lib/build-documents'));
 var conf = require(process.env.PWD); // Loads index.js of outer npm project
 
@@ -40,26 +40,26 @@ buildDocuments(conf)
         };
 
         // Build each markdown file to HTML and PDF. Only docs in docs/ root are used
-        if (docs) Object.keys(docs).forEach(key => {
-            let src = docs[key];
-            let dst = src.replace(process.env.PWD,'').replace('node_modules','')
-                         .replace('re-conf', 'conf').replace('docs', '');
-            dst = path.join(process.env.PWD,'build','docs',dst);
-            if (typeof src === 'string' && src.endsWith(".md")) {
+        Object.values(docs || {})
+            .filter(src => typeof src === 'string')
+            .forEach(src => {
+                let dst = src.replace(process.env.PWD,'').replace('node_modules','')
+                    .replace('re-conf', 'conf').replace('docs', '');
+                dst = path.join(process.env.PWD,'build','docs',dst);
+                if (src.endsWith('.md')) {
+                    let dstPdf = dst.replace('.md', '.pdf');
+                    let dstHtml = dst.replace('.md', '.html');
 
-                let dstPdf = dst.replace('.md', '.pdf');
-                let dstHtml = dst.replace('.md', '.html');
-
-                options.preProcessHtml = preProcessHtml(dstHtml);
-                Markdownpdf(Object.assign({},options)).from(src).to(dstPdf, function () {
-                  console.log("Done " + dst.replace(process.env.PWD,''));
-                });
-            } else {
-                let dstDir = path.dirname(dst);
-                if (!fs.existsSync(dstDir)) fs.mkdirSync(dstDir);
-                fs.createReadStream(src).pipe(fs.createWriteStream(dst));
-            }
-        });
+                    options.preProcessHtml = preProcessHtml(dstHtml);
+                    markdownpdf(Object.assign({},options)).from(src).to(dstPdf, function () {
+                        console.log('Done ' + dst.replace(process.env.PWD,''));
+                    });
+                } else {
+                    let dstDir = path.dirname(dst);
+                    if (!fs.existsSync(dstDir)) fs.mkdirSync(dstDir);
+                    fs.createReadStream(src).pipe(fs.createWriteStream(dst));
+                }
+            });
     })
     .catch(function(errors) {
         console.log('Operation failed:');
