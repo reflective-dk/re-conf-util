@@ -36,7 +36,6 @@
     "cheerio": "^1.0.0-rc.2",
     "ipfs-api": "^20.0.0",
     "ipfs-unixfs-engine": "^0.24.4",
-    "ipld": "^0.15.0",
     "lodash": "^4.17.5",
     "markdown-pdf": "^9.0.0",
     "mz": "^2.7.0",
