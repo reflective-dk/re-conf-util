@@ -11,11 +11,11 @@
     "validate-objects": "./scripts/validate-objects.sh",
     "upload-data": "./scripts/upload-data.js",
     "list-integrations": "./scripts/list-integrations.js",
-    "create-object": "./scripts/create-object.js"
+    "create-object": "./scripts/create-object.js",
+    "qunit-test": "./lib/qunit-test.js"
   },
   "scripts": {
     "test": "mocha --recursive",
-    "qunit-test": "./lib/qunit-test.js",
     "clobber": "rm -rf node_modules package-lock.json"
   },
   "repository": {
