@@ -44,7 +44,7 @@ function setUp() {
             normal: 42,
             relation: { id: 'other' },
             noMatch: { hash: 'not-found' },
-            match: { hash: 'replaced-hash' }
+            match: { hash: 'replaced-hash', "key": "found-key" }
         } } ] } ]
     };
 
@@ -69,7 +69,7 @@ function setUp() {
             noMatch: { hash: 'not-found' },
             multi: {
                 noMatch: { hash: 'no-luck' },
-                match: { hash: 'replaced-another-hash' }
+                match: { hash: 'replaced-another-hash', "key": "found-another-key" }
             }
         } } ] } ]
     };

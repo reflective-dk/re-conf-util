@@ -9,19 +9,19 @@ var resolveConf = require('../lib/resolve-conf');
 describe('resolveConf', function() {
     before(setUp);
     it('should resolve conf with empty dependency array', function() {
-        expect(resolveConf(this.baseConf, this.dataMap, []))
+        return expect(resolveConf(this.baseConf, this.dataMap, []))
             .to.eventually.deep.equal(this.confNoDeps,
             'no dependencies specified so none should not be included');
     });
 
     it('should resolve conf with no dependencies specified', function() {
-        expect(resolveConf(this.baseConf, this.dataMap))
+        return expect(resolveConf(this.baseConf, this.dataMap))
             .to.eventually.deep.equal(this.confNoDeps,
             'no dependencies specified so none should not be included');
     });
 
     it('should resolve conf with a set of dependencies', function() {
-        expect(resolveConf(this.baseConf, this.dataMap, [ this.depConf ]))
+        return expect(resolveConf(this.baseConf, this.dataMap, [ this.depConf ]))
             .to.eventually.deep.equal(this.confWithDeps,
             'one dependency should be pulled in');
     });
@@ -66,6 +66,7 @@ function setUp() {
                 instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
             }
         },
+        docs: {},
         misc: [],
         state: {
             'conf-acme': [ { id: 'acme-class' }, { id: 'acme-instance' } ]
@@ -81,6 +82,7 @@ function setUp() {
                 instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
             }
         },
+        docs: {},
         misc: [],
         state: {
             'conf-acme': [ { id: 'acme-class' }, { id: 'acme-instance' } ],
