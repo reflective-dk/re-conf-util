@@ -82,3 +82,35 @@ resolved = {
 ```
 
 Look at `test/end-to-end-test.js` for more information.
+
+## Puppeteer and Chromium ##
+Install chromium on Ubuntu
+```sh
+sudo apt install --assume-yes chromium-browser
+```
+
+Reference in test suite by setting executablePath
+
+```sh
+const { runQunitPuppeteer, printOutput } = require('re-conf-util/lib/qunit-runner');
+
+function runATest(args) {
+  logger.info('testing', args.qunitTestPath);
+  let runArgs = {
+    redirectConsole: false,
+    testDataDir: __dirname + '/data/',
+    targetUrl: args.qunitTestPath,
+    puppeteerArgs: ['--allow-file-access-from-files', '--no-sandbox']
+  };
+
+  runArgs.executablePath ='/usr/bin/chromium-browser';
+
+  return runQunitPuppeteer(runArgs)
+  .then((result) => {
+    if (result.stats.failed !== 0) {
+      console.error(util.inspect(result, { showHidden: false, depth: 10 }));
+    }
+    assert.equal(result.stats.failed, 0);
+  });
+}
+```
