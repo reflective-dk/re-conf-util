@@ -1,10 +1,8 @@
 ---
 id: de26e024-512f-4b75-8e64-78cfb3037d83
-mimeType: application/vnd.reflective-dk.object+json
 registrations:
   - validity:
       - input:
-          # Responsible actor - actor: { id: actor.id }
           class: { id: 2bb49d5b-b682-4a10-b643-f364beb39db1, name: Acme }
           name: Acme 1
           widget: { hash: widget-1.txt }
