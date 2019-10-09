@@ -1,0 +1,9 @@
+---
+id: 92508763-dee0-4ce0-b2fb-c8c831cfffeb
+registrations:
+  - validity:
+      - input:
+          class: { id: 2bb49d5b-b682-4a10-b643-f364beb39db1, name: Acme }
+          name: Acme 2
+          widget: { hash: widget-2.txt }
+...

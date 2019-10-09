@@ -3,11 +3,13 @@
 var chai = require('chai');
 chai.use(require('chai-as-promised'));
 var expect = chai.expect;
+var assert = chai.assert;
 var path = require('path');
-var requireyml = require('require-yml');
+var requireyml = require(__dirname + '/../lib/require-yml');
 
 var rootLoc = path.join(path.dirname(require.resolve('../index')), 'test-data');
 var confLoc = path.join(rootLoc, 'conf');
+var errorInConfLoc = path.join(rootLoc, 'error-conf');
 var dataLoc = path.join(rootLoc, 'widgets');
 
 var confUtil = require('../index');
@@ -29,6 +31,19 @@ describe('End-to-end test', function() {
         expect(confUtil.buildObjects(conf))
             .to.eventually.deep.equal(this.objects)
             .notify(done);
+    });
+    
+    it('should throw error on mis-formatted yml', function(done) {
+        try {
+            var conf = confUtil.prepareConf(errorInConfLoc);
+        } catch (e) {
+            console.error(e);
+            done();
+        }
+        return confUtil.buildObjects(conf)
+        .then(() => {
+            assert.ok(false, 'it should have thrown error');
+        });
     });
 });
 
