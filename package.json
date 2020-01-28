@@ -6,6 +6,7 @@
   "bin": {
     "binadd": "./scripts/binadd.js",
     "binget": "./scripts/binget.js",
+    "bpmn-doctor": "./scripts/bpmn-doctor.js",
     "build-objects": "./scripts/build-objects.js",
     "build-documents": "./scripts/build-documents.js",
     "validate-objects": "./scripts/validate-objects.sh",
@@ -32,6 +33,7 @@
   "private": true,
   "dependencies": {
     "bluebird": "^3.5.1",
+    "bpmn-moddle": "^6.0.2",
     "bunyan": "^1.8.10",
     "cheerio": "^1.0.0-rc.2",
     "ipfs-api": "^20.0.0",
