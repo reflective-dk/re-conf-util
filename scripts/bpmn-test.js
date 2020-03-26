@@ -16,7 +16,7 @@ buildObjects(conf).then(function(objects) {
     var objectMap = _.keyBy(objects, 'id');
     var filenames = fs.readdirSync(bpmnLocation).filter(fn => /.bpmn$/.test(fn));
     var failure = false;
-    filenames.forEach(function(filename) {
+    filenames.forEach(function(filename, inx) {
         var xml = fs.readFileSync(path.join(bpmnLocation, filename), 'utf8');
         bpmnDoctor(xml, objectMap, function(err, report) {
             if (err) {
@@ -30,9 +30,9 @@ buildObjects(conf).then(function(objects) {
                             invalid);
                 failure = true;
             }
+            if (failure && (inx == filenames.length-1)) {
+                process.exit(1);
+            }
         });
     });
-    if (failure) {
-        process.exit(1);
-    }
 });
