@@ -7,6 +7,7 @@
     "binadd": "./scripts/binadd.js",
     "binget": "./scripts/binget.js",
     "bpmn-doctor": "./scripts/bpmn-doctor.js",
+    "bpmn-test": "./scripts/bpmn-test.js",
     "build-objects": "./scripts/build-objects.js",
     "build-documents": "./scripts/build-documents.js",
     "validate-objects": "./scripts/validate-objects.sh",
