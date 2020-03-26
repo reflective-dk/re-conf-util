@@ -33,8 +33,8 @@ function setUp() {
         name: 'conf-acme',
         model: {
             acme: {
-                classes: { 'acme-class': { id: 'acme-class' } },
-                instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
+                classes: { 'acme-class': { id: 'acme-class', registrations: [ { validity: [ { input: {} } ] } ] } },
+                instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance', registrations: [ { validity: [ { input: {} } ] } ] } } }
             }
         }
     };
@@ -45,13 +45,16 @@ function setUp() {
         name: 'conf-boring',
         model: {
             boring: {
-                classes: { 'boring-class': { id: 'boring-class' } },
-                instances: { 'boring-class': { 'boring-instance': { id: 'boring-instance' } } }
+                classes: { 'boring-class': { id: 'boring-class', registrations: [ { validity: [ { input: {} } ] } ] } },
+                instances: { 'boring-class': { 'boring-instance': { id: 'boring-instance', registrations: [ { validity: [ { input: {} } ] } ] } } }
             }
         },
         resolve: function() { return Promise.resolve(self.depConf); },
         state: {
-            'conf-boring': [ { id: 'boring-class' }, { id: 'boring-instance' } ]
+            'conf-boring': [
+                { id: 'boring-class', registrations: [ { validity: [ { input: {} } ] } ] },
+                { id: 'boring-instance', registrations: [ { validity: [ { input: {} } ] } ] }
+            ]
         },
         data: []
     };
@@ -62,14 +65,17 @@ function setUp() {
         name: 'conf-acme',
         model: {
             acme: {
-                classes: { 'acme-class': { id: 'acme-class' } },
-                instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
+                classes: { 'acme-class': { id: 'acme-class', registrations: [ { validity: [ { input: {} } ] } ] } },
+                instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance', registrations: [ { validity: [ { input: {} } ] } ] } } }
             }
         },
         docs: {},
         misc: [],
         state: {
-            'conf-acme': [ { id: 'acme-class' }, { id: 'acme-instance' } ]
+            'conf-acme': [
+                { id: 'acme-class', registrations: [ { validity: [ { input: {} } ] } ] },
+                { id: 'acme-instance', registrations: [ { validity: [ { input: {} } ] } ] }
+            ]
         },
         data: []
     };
@@ -78,15 +84,21 @@ function setUp() {
         name: 'conf-acme',
         model: {
             acme: {
-                classes: { 'acme-class': { id: 'acme-class' } },
-                instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance' } } }
+                classes: { 'acme-class': { id: 'acme-class', registrations: [ { validity: [ { input: {} } ] } ] } },
+                instances: { 'acme-class': { 'acme-instance': { id: 'acme-instance', registrations: [ { validity: [ { input: {} } ] } ] } } }
             }
         },
         docs: {},
         misc: [],
         state: {
-            'conf-acme': [ { id: 'acme-class' }, { id: 'acme-instance' } ],
-            'conf-boring': [ { id: 'boring-class' }, { id: 'boring-instance' } ]
+            'conf-acme': [
+                { id: 'acme-class', registrations: [ { validity: [ { input: {} } ] } ] },
+                { id: 'acme-instance', registrations: [ { validity: [ { input: {} } ] } ] }
+            ],
+            'conf-boring': [
+                { id: 'boring-class', registrations: [ { validity: [ { input: {} } ] } ] },
+                { id: 'boring-instance', registrations: [ { validity: [ { input: {} } ] } ] }
+            ]
         },
         data: []
     };
