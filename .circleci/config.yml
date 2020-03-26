@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: reflectivedk/circleci-docker-and-gcloud
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Authenticate gcloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run:
+          name: Build application test Docker image
+          command: |
+            gcloud docker -- build -t conf-test test-image
+      - run:
+          name: Run unit tests
+          command: |
+            gcloud docker -- run conf-test /bin/sh run-unit-tests.sh
+      - run:
+          name: Logs
+          command: |
+            docker logs conf-test
+          when: on_fail
