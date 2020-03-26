@@ -27,7 +27,7 @@ buildObjects(conf).then(function(objects) {
             var invalid = _.get(report, 'flowNodeRefs.invalidReferences', []);
             if (invalid.length) {
                 console.log('FAILURE', 'invalid flow node refs:', report.name,
-                            invalid);
+                            '(' + filename + ')', invalid);
                 failure = true;
             }
             if (failure && (inx == filenames.length-1)) {
