@@ -24,10 +24,16 @@ buildObjects(conf).then(function(objects) {
                 failure = true;
                 return;
             }
-            var invalid = _.get(report, 'flowNodeRefs.invalidReferences', []);
-            if (invalid.length) {
+            var invalidElements = _.get(report, 'invalidElements', []);
+            var invalidFlowNodeRefs = _.get(report, 'flowNodeRefs.invalidReferences', []);
+            if (invalidElements.length) {
+                console.log('FAILURE', 'invalid elements:', report.name,
+                            '(' + filename + ')', invalidElements);
+                failure = true;
+            }
+            if (invalidFlowNodeRefs.length) {
                 console.log('FAILURE', 'invalid flow node refs:', report.name,
-                            '(' + filename + ')', invalid);
+                            '(' + filename + ')', invalidFlowNodeRefs);
                 failure = true;
             }
             if (failure && (inx == filenames.length-1)) {
