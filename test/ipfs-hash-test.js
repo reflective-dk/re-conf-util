@@ -7,6 +7,7 @@ var ipfsHash = require('../lib/ipfs-hash');
 
 describe('ipfsHash', function() {
     before(setUp);
+    
     it('should generate IPFS multihash of small data', function(done) {
         expect(ipfsHash(this.small)).to.eventually.equal(this.smallHash).notify(done);
     });
