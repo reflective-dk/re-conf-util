@@ -1,4 +1,4 @@
-FROM gcr.io/city-7337/base
+FROM gcr.io/city-7337/base:node-12.15.0
 
 COPY run-unit-tests.sh run-unit-tests.sh
 RUN chmod a+x run-unit-tests.sh
