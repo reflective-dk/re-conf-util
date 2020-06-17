@@ -14,7 +14,12 @@ var conf = require(process.env.PWD); // Loads index.js of outer npm project
 
 buildObjects(conf).then(function(objects) {
     var objectMap = _.keyBy(objects, 'id');
-    var filenames = fs.readdirSync(bpmnLocation).filter(fn => /.bpmn$/.test(fn));
+    try {
+        var filenames = fs.readdirSync(bpmnLocation).filter(fn => /.bpmn$/.test(fn));
+    } catch (e) {
+        // No problem - just no bpmn location, so leave straight away
+        return;
+    }
     var failure = false;
     filenames.forEach(function(filename, inx) {
         var xml = fs.readFileSync(path.join(bpmnLocation, filename), 'utf8');
