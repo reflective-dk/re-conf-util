@@ -3,6 +3,24 @@
 Use this module to create deplyable configuration modules for specific customers
 or functionality.
 
+### conf scripts ###
+
+#### compare-to ####
+
+Run this npm target to get a report of reused uuids between two conf repos.
+
+```
+re-conf-hvidovre $ npm run compare-to ../re-conf-vallensbaek
+// =>
+{
+  '625d7ec9-2e45-49a7-a514-e409e277ea32': [
+    'ad.instances.ldap-fetcher.ad-group-fetcher',
+    'ad.instances.ldap-fetcher.ad-group-fetcher'
+  ],
+  ...
+}
+```
+
 ### Example ###
 
 The `re-models` project uses this module to create a deployable

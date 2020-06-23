@@ -10,6 +10,7 @@
     "bpmn-test": "./scripts/bpmn-test.js",
     "build-objects": "./scripts/build-objects.js",
     "build-documents": "./scripts/build-documents.js",
+    "compare-to": "./scripts/compare-to.js",
     "validate-objects": "./scripts/validate-objects.sh",
     "upload-data": "./scripts/upload-data.js",
     "list-integrations": "./scripts/list-integrations.js",
