@@ -40,7 +40,7 @@ function visitAll(conf, map, path) {
     case Array.isArray(conf):
     case typeof conf != 'object':
         return map;
-    case !!conf.id:
+    case !!conf.id && !! conf.registrations:
         var list = map[conf.id] = map[conf.id] || [];
         list.push(path.join('.'));
         return map;
