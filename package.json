@@ -6,6 +6,7 @@
   "bin": {
     "binadd": "./scripts/binadd.js",
     "binget": "./scripts/binget.js",
+    "bpmn-update-gateways": "./scripts/bpmn-update-gateways.js",
     "bpmn-doctor": "./scripts/bpmn-doctor.js",
     "bpmn-test": "./scripts/bpmn-test.js",
     "build-objects": "./scripts/build-objects.js",
