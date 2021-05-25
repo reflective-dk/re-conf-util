@@ -46,4 +46,7 @@ buildObjects(conf).then(function(objects) {
             }
         });
     });
+})
+.catch(function (error) {
+    console.error(error);
 });
