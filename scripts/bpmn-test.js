@@ -11,6 +11,7 @@ var bpmnDoctor = require(path.join(__dirname, '../lib/bpmn-doctor'));
 
 var bpmnLocation = path.join(process.env.PWD, 'data');
 var conf = require(process.env.PWD); // Loads index.js of outer npm project
+var util = require('util');
 
 buildObjects(conf).then(function(objects) {
     var objectMap = _.keyBy(objects, 'id');
@@ -48,5 +49,5 @@ buildObjects(conf).then(function(objects) {
     });
 })
 .catch(function (error) {
-    console.error(error);
+    console.error(util.inspect(error, { showHidden: true, depth: 10 }));
 });
