@@ -38,6 +38,8 @@
     "bluebird": "^3.5.1",
     "bpmn-moddle": "^6.0.2",
     "bunyan": "^1.8.10",
+    "ipfs-unixfs-importer": "^9.0.6",
+    "ipld": "^0.30.2",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.5",
     "mz": "^2.7.0",
