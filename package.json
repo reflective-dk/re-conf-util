@@ -38,9 +38,9 @@
     "bluebird": "^3.5.1",
     "bpmn-moddle": "^6.0.2",
     "bunyan": "^1.8.10",
-    "cheerio": "^1.0.0-rc.2",
     "filereader": "^0.10.3",
-    "ipfs-core": "^0.14.0",
+    "ipfs-unixfs-importer": "^0.45.0",
+    "ipld": "^0.26.4",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.5",
     "mz": "^2.7.0",
@@ -50,9 +50,8 @@
     "remarkable": "^1.7.1",
     "stream-array": "^1.1.2",
     "string-template": "git+ssh://git@github.com:reflective-dk/string-template.git",
-    "through": "^2.3.8",
     "through2": "^2.0.3",
-    "uuid": "^3.2.1",
+    "uuid": "^8.3.2",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
