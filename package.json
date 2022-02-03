@@ -39,8 +39,7 @@
     "bpmn-moddle": "^6.0.2",
     "bunyan": "^1.8.10",
     "cheerio": "^1.0.0-rc.2",
-    "ipfs-unixfs-importer": "^0.45.0",
-    "ipld": "^0.26.2",
+    "ipfs-core": "^0.14.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.5",
     "mz": "^2.7.0",
@@ -57,8 +56,8 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "rimraf": "^2.6.2",
     "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1"
+    "chai-as-promised": "^7.1.1",
+    "rimraf": "^2.6.2"
   }
 }

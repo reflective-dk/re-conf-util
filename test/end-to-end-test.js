@@ -24,14 +24,14 @@ describe('End-to-end test', function() {
             delete resolved.deploy;
         })).to.eventually.deep.equal(this.resolved)
            .notify(done);
-    });
+    }).timeout(4000);
 
     it('should build array of objects', function(done) {
         var conf = confUtil.prepareConf(confLoc, dataLoc, 'test-conf');
         expect(confUtil.buildObjects(conf))
             .to.eventually.deep.equal(this.objects)
             .notify(done);
-    });
+    }).timeout(4000);
     
     it('should throw error on mis-formatted yml', function(done) {
         try {
@@ -44,8 +44,8 @@ describe('End-to-end test', function() {
         .then(() => {
             assert.ok(false, 'it should have thrown error');
         });
-    });
-});
+    }).timeout(4000);
+}).timeout(4000);
 
 function setUp() {
     var acmeClass = requireyml(path.join(confLoc, 'test', 'classes', 'acme'));
