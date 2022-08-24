@@ -2,6 +2,10 @@
 
 "use strict";
 
+const bunyan = require('bunyan');
+
+global.global_logger = bunyan.createLogger({ name: 'bpmn-test', level: 'error' });
+
 var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
