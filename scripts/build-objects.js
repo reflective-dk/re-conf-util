@@ -2,6 +2,9 @@
 
 "use strict";
 
+const bunyan = require('bunyan');
+global.global_logger = bunyan.createLogger({ name: 're-conf-util', level: 'error' });
+
 var inspect = require('util').inspect;
 var fs = require('fs');
 var path = require('path');
